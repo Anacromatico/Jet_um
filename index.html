@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Julia eu te amo</title>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Schoolbell&display=swap");
+
+body {
+  display: flex;
+  width: 100%;
+  margin: 0;
+  height: 90vh;
+  flex-align: center;
+  flex-direction: row;
+  justify-content: center;
+  align-itens: center;
+}
+
+div {
+  display: flex;
+  flex-align: center;
+  justify-content: center;
+  align-itens: center;
+  flex-direction: column;
+}
+
+h1 {
+  position: absolute;
+  top: 40vh;
+  color: white;
+  font-size: 3rem;
+  -webkit-text-stroke-width: 0.4px; /* Largura da borda */
+  -webkit-text-stroke-color: black; /* Cor da borda */
+}
+
+h6 {
+  position: absolute;
+  top: 92vh;
+}
+
+svg {
+  width: 65vw;
+  height: 65vw;
+  transition-duration: 0.3s;
+  color: gold;
+}
+
+.slide {
+  animation-name: slide-in;
+  animation-duration: 0.2s;
+}
+
+.schoolbell-regular {
+  font-family: "Schoolbell", cursive;
+  font-weight: 600;
+  font-style: normal;
+}
+
+@keyframes slide-in {
+  from {
+    width: 5px;
+  }
+  90% {
+    width: 75vw;
+  }
+  to {
+    width: 65vw;
+  }
+}
+
+    </style>
+
+  </head>
+  <body>
+    <div>
+      <svg id="coracao_svg" class="slide" color="gold" viewBox="0 0 226 200"
+        onclick="mudarCor()">
+        <path
+          d="M112.8,20.9C74.6-17.4,14.8-5.2,0.9,46.7c-5,18.4,3.2,42.4,24.5,63.1c21.8,21.2,63.5,50.4,87.4,68.2 c23.9-17.8,65.6-47,87.4-68.2c21.3-20.7,29.5-44.7,24.5-63.1C212-5.2,151.2-17.4,112.8,20.9z" />
+      </svg>
+
+    </div>
+
+    <h1 class="schoolbell-regular">Julia eu te amo</h1>
+    <h6 class="schoolbell-regular">Igor</h6>
+  </body>
+  <script>
+      // 1. Pega o elemento SVG que vamos colorir
+let coracao = document.getElementById("coracao_svg");
+
+// 2. Cria a nossa lista (array) de cores claras
+const cores = [
+  "gold", // Amarelo
+  "mediumpurple", // Roxo claro
+  "lightgreen", // Verde claro
+  "lightblue", // Azul claro
+  "lightcoral", // Coral claro
+  "lightpink", // Rosa claro
+  "paleturquoise", // Turquesa pálido
+  "khaki" // Cáqui
+];
+
+// 3. Uma variável para guardar a posição da cor atual na lista. Começa em 0 (a primeira cor).
+let indiceCorAtual = 0;
+
+// Define a cor inicial do coração assim que a página carrega
+coracao.style.fill = cores[indiceCorAtual];
+
+// 4. A função que será chamada a cada clique
+function mudarCor() {
+  coracao.classList.add("slide");
+  void coracao.offsetWidth;
+  // Avança para o próximo índice da lista.
+  // O operador '%' faz com que, ao chegar no final da lista, o índice volte a ser 0.
+  // Ex: Se a lista tem 8 cores, os índices vão de 0 a 7.
+  // (7 + 1) % 8 = 0. A mágica acontece aqui!
+  indiceCorAtual = (indiceCorAtual + 1) % cores.length;
+
+  // Pega a nova cor da lista usando o novo índice
+  const novaCor = cores[indiceCorAtual];
+
+  // Aplica a nova cor ao preenchimento (fill) do coração
+  coracao.style.fill = novaCor;
+
+  const anguloAleatorio = Math.random() * 10 - 5;
+
+  // Aplica o ângulo aleatório à propriedade 'transform' do SVG.
+  // Usamos ` ` (template literals) para construir a string facilmente.
+  coracao.style.transform = `rotate(${anguloAleatorio}deg)`;
+}
+
+coracao.addEventListener("animationend", () => {
+  // Remove a classe para que o elemento fique "limpo" e pronto para a próxima vez.
+  coracao.classList.remove("slide");
+});
+
+    </script>
+</html>
